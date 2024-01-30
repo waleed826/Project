@@ -1,3 +1,223 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
+import React from 'react';
+// import type {Node} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  Alert,
+  useColorScheme,
+  View,
+  Button,
+} from 'react-native';
+
+import {
+  BiometricIsAvailable,
+  BasicBiometricAuth,
+  LoginBiometricAuth,
+  SetUser,
+  UpdateUser,
+  GetUser,
+  DeleteUser,
+} from 'react-native-biometric-login';
+
+const Separator = () => (
+  <View style={styles.separator} />
+);
+
+const App = () => (
+  <SafeAreaView style={styles.container}>
+    <View>
+      <Text style={styles.title}>
+        Is there an available biometric sensor?
+      </Text>
+      <Button
+        title="Execute"
+        color="green"
+        onPress={() => {
+          BiometricIsAvailable().then(res => {
+            Alert.alert(JSON.stringify(res))
+            }).catch(e => {
+              Alert.alert(e.toString())
+              })
+          }}
+      />
+    </View>
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        Basic Biometric Prompt
+      </Text>
+      <Button
+        title="Execute"
+        color="#f194ff"
+        onPress={() => {
+          BasicBiometricAuth().then(res => {
+            Alert.alert(JSON.stringify(res))
+            }).catch(e => {
+              Alert.alert(e.toString())
+              })
+          }}
+      />
+    </View>
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        Biometric Prompt with stored credentials returned.
+      </Text>
+      <Button
+        title="Execute"
+        color="red"
+        onPress={() => {
+          LoginBiometricAuth().then(res => {
+            Alert.alert(JSON.stringify(res))
+            }).catch(e => {
+              Alert.alert(e.toString())
+              })
+          }}
+      />
+    </View>
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        Credential Store Functions
+      </Text>
+      <View style={styles.fixToText}>
+        <Button
+          title="Set User"
+          onPress={() => {
+            SetUser("John", "1234Doe").then(res => {
+              Alert.alert(JSON.stringify(res))
+              }).catch(e => {
+                Alert.alert(e.toString())
+                })
+            }}
+        />
+        <Button
+          title="Update User"
+          onPress={() => {
+            UpdateUser("Jane", "Doe5678").then(res => {
+              Alert.alert(JSON.stringify(res))
+              }).catch(e => {
+                Alert.alert(e.toString())
+                })
+            }}
+        />
+      </View>
+    </View>
+    <View style={{marginTop: 15}}>
+      <View style={styles.fixToText}>
+        <Button
+          title="Get User"
+          onPress={() => {
+            GetUser().then(res => {
+              Alert.alert(JSON.stringify(res))
+              }).catch(e => {
+                Alert.alert(e.toString())
+                })
+            }}
+        />
+        <Button
+          title="Delete User"
+          onPress={() => {
+            DeleteUser().then(res => {
+              Alert.alert(JSON.stringify(res))
+              }).catch(e => {
+                Alert.alert(e.toString())
+                })
+            }}
+        />
+      </View>
+    </View>
+  </SafeAreaView>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 16,
+  },
+  title: {
+    textAlign: 'center',
+    marginVertical: 8,
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+});
+
+export default App;
+
+
+// import React, { useState } from 'react';
+// import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+// import { View, Text, TouchableOpacity } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
+
+// const Drawer = createDrawerNavigator();
+
+// const HomeScreen = () => {
+//   return(
+//     <View><Text>HomeScreen</Text></View>
+//   )
+//   };
+
+// const SettingsScreen = () => {
+//   return(
+//     <View><Text>HomeScreen</Text></View>
+//   )
+//   };
+
+// const CustomDropdownLabel = ({ label, onPress }) => (
+//   <TouchableOpacity onPress={onPress} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
+//     <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{label}</Text>
+//   </TouchableOpacity>
+// );
+
+// const CustomDrawerContent = (props) => {
+//   return (
+//     <DrawerContentScrollView {...props}>
+//       <DrawerItemList {...props} />
+//       {/* Additional drawer items */}
+//       <DrawerItem label="Home" onPress={() => props.navigation.navigate('Home')} />
+//       <CustomDropdownLabel  label="Dropdown Label"  onPress={() => { /* Handle dropdown press */ }} />
+//       <DrawerItem label="Settings" onPress={() => props.navigation.navigate('Settings')} />
+//     </DrawerContentScrollView>
+//   );
+// };
+
+// const App = () => {
+//   const [hide,setHide] = useState(false);
+//   return (
+//     <NavigationContainer>
+
+//     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+//       <Drawer.Screen name="Home" component={HomeScreen} />
+//       <Drawer.Screen name="Settings" component={SettingsScreen} />
+//     </Drawer.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+
+// export default App;
+
+
 // import { StyleSheet, Text, View } from 'react-native'
 // import React from 'react'
 // import Svg, { Path,Circle } from 'react-native-svg';
@@ -30,46 +250,46 @@
 // const styles = StyleSheet.create({})
 
 
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import OneSignal from 'react-native-onesignal';
-const App = () => {
+// import { StyleSheet, Text, View } from 'react-native'
+// import React, { useEffect } from 'react'
+// import OneSignal from 'react-native-onesignal';
+// const App = () => {
 
-  useEffect(()=>{
-    OneSignals()
-  },[])
-  const OneSignals = ()=>{
-// OneSignal Initialization
-OneSignal.setAppId('9446f177-17cd-4c86-8716-24250db9ec2d');
+//   useEffect(()=>{
+//     OneSignals()
+//   },[])
+//   const OneSignals = ()=>{
+// // OneSignal Initialization
+// OneSignal.setAppId('9446f177-17cd-4c86-8716-24250db9ec2d');
 
-// promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
-// We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
-OneSignal.promptForPushNotificationsWithUserResponse();
+// // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
+// // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
+// OneSignal.promptForPushNotificationsWithUserResponse();
 
-//Method for handling notifications received while app in foreground
-OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
-  console.log("OneSignal: notification will show in foreground:", notificationReceivedEvent);
-  let notification = notificationReceivedEvent.getNotification();
-  console.log("notification: ", notification.body);
-  // Complete with null means don't show a notification.
-  notificationReceivedEvent.complete(notification);
-});
+// //Method for handling notifications received while app in foreground
+// OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
+//   console.log("OneSignal: notification will show in foreground:", notificationReceivedEvent);
+//   let notification = notificationReceivedEvent.getNotification();
+//   console.log("notification: ", notification.body);
+//   // Complete with null means don't show a notification.
+//   notificationReceivedEvent.complete(notification);
+// });
 
-//Method for handling notifications opened
-OneSignal.setNotificationOpenedHandler(notification => {
-  console.log("OneSignal: notification opened:", notification);
-});
-  }
-  return (
-    <View>
-      <Text>App</Text>
-    </View>
-  )
-}
+// //Method for handling notifications opened
+// OneSignal.setNotificationOpenedHandler(notification => {
+//   console.log("OneSignal: notification opened:", notification);
+// });
+//   }
+//   return (
+//     <View>
+//       <Text>App</Text>
+//     </View>
+//   )
+// }
 
-export default App
+// export default App
 
-const styles = StyleSheet.create({})
+// const styles = StyleSheet.create({})
 
 // import { StyleSheet, Text, View } from 'react-native'
 // import React from 'react'
